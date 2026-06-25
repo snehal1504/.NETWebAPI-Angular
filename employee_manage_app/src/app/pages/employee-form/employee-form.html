@@ -1,0 +1,140 @@
+<div class="employee-form container mt-4">
+  <h3 class="mb-3 text-primary">Add Employee</h3>
+  <form #empForm="ngForm" (ngSubmit)="addEmployee(empForm)" novalidate>
+
+    <div class="row">
+      <!-- First Name -->
+      <div class="col-md-6 mb-3">
+        <input type="text" [(ngModel)]="newEmployee.firstName" name="firstName"
+               placeholder="First Name" class="form-control"
+               required minlength="2" maxlength="100" #firstName="ngModel"
+               [ngClass]="{'is-invalid': empForm.submitted && firstName.invalid}" />
+        <div *ngIf="empForm.submitted && firstName.invalid" class="invalid-feedback">
+          First Name is required (min 2 chars).
+        </div>
+      </div>
+
+      <!-- Last Name -->
+      <div class="col-md-6 mb-3">
+        <input type="text" [(ngModel)]="newEmployee.lastName" name="lastName"
+               placeholder="Last Name" class="form-control"
+               required minlength="2" maxlength="100" #lastName="ngModel"
+               [ngClass]="{'is-invalid': empForm.submitted && lastName.invalid}" />
+        <div *ngIf="empForm.submitted && lastName.invalid" class="invalid-feedback">
+          Last Name is required (min 2 chars).
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Contact No -->
+      <div class="col-md-6 mb-3">
+        <input type="text" [(ngModel)]="newEmployee.contactNo" name="contactNo"
+               placeholder="Contact No (10 digits)" class="form-control"
+               required pattern="^[0-9]{10}$" #contactNo="ngModel"
+               [ngClass]="{'is-invalid': empForm.submitted && contactNo.invalid}" />
+        <div *ngIf="empForm.submitted && contactNo.invalid" class="invalid-feedback">
+          Contact No must be 10 digits.
+        </div>
+      </div>
+
+      <!-- Alt Contact No -->
+      <div class="col-md-6 mb-3">
+        <input type="text" [(ngModel)]="newEmployee.altContactNo" name="altContactNo"
+               placeholder="Alt Contact No (optional)" class="form-control"
+               pattern="^[0-9]{10}$" #altContactNo="ngModel"
+               [ngClass]="{'is-invalid': empForm.submitted && altContactNo.invalid}" />
+        <div *ngIf="empForm.submitted && altContactNo.invalid" class="invalid-feedback">
+          Alt Contact No must be 10 digits.
+        </div>
+      </div>
+    </div>
+
+    <!-- Address -->
+    <div class="mb-3">
+      <textarea [(ngModel)]="newEmployee.address" name="address"
+                placeholder="Address" class="form-control"
+                required maxlength="2000" #address="ngModel"
+                [ngClass]="{'is-invalid': empForm.submitted && address.invalid}"></textarea>
+      <div *ngIf="empForm.submitted && address.invalid" class="invalid-feedback">
+        Address is required.
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Email -->
+      <div class="col-md-6 mb-3">
+        <input type="email" [(ngModel)]="newEmployee.email" name="email"
+               placeholder="Email" class="form-control"
+               required maxlength="150" #email="ngModel"
+               [ngClass]="{'is-invalid': empForm.submitted && email.invalid}" />
+        <div *ngIf="empForm.submitted && email.invalid" class="invalid-feedback">
+          Valid Email is required.
+        </div>
+      </div>
+
+      <!-- Designation -->
+      <div class="col-md-6 mb-3">
+        <select [(ngModel)]="newEmployee.designationId" name="designationId"
+                class="form-select" required #designation="ngModel"
+                [ngClass]="{'is-invalid': empForm.submitted && designation.invalid}">
+          <option value="" disabled selected hidden>-- Select Designation --</option>
+          <option *ngFor="let d of designations" [value]="d.designationId">
+            {{ d.designationName }}
+          </option>
+        </select>
+        <div *ngIf="empForm.submitted && designation.invalid" class="invalid-feedback">
+          Designation is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Hire Date -->
+      <div class="col-md-6 mb-3">
+        <input type="date" [(ngModel)]="newEmployee.hireDate" name="hireDate"
+               class="form-control" required #hireDate="ngModel"
+               [ngClass]="{'is-invalid': empForm.submitted && hireDate.invalid}" />
+        <div *ngIf="empForm.submitted && hireDate.invalid" class="invalid-feedback">
+          Hire Date is required.
+        </div>
+      </div>
+
+      <!-- Salary -->
+      <div class="col-md-6 mb-3">
+        <input type="number" [(ngModel)]="newEmployee.salary" name="salary"
+               placeholder="Salary" class="form-control"
+               required min="0" step="0.01" #salary="ngModel"
+               [ngClass]="{'is-invalid': empForm.submitted && salary.invalid}" />
+        <div *ngIf="empForm.submitted && salary.invalid" class="invalid-feedback">
+          Salary must be a positive number.
+        </div>
+      </div>
+    </div>
+
+    <!-- Role -->
+    <div class="mb-3">
+      <input type="text" [(ngModel)]="newEmployee.role" name="role"
+             placeholder="Role" class="form-control"
+             maxlength="50" #role="ngModel"
+             [ngClass]="{'is-invalid': empForm.submitted && role.invalid}" />
+      <div *ngIf="empForm.submitted && role.invalid" class="invalid-feedback">
+        Role is required.
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="mb-3">
+      <input type="password" [(ngModel)]="plainPassword" name="plainPassword"
+             placeholder="Password" class="form-control"
+             required minlength="6" #plainPassword="ngModel"
+             [ngClass]="{'is-invalid': empForm.submitted && plainPassword.invalid}" />
+      <div *ngIf="empForm.submitted && plainPassword.invalid" class="invalid-feedback">
+        Password is required (min 6 chars).
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <button class="btn btn-success w-100">Add Employee</button>
+  </form>
+</div>

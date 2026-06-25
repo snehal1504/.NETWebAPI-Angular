@@ -1,0 +1,141 @@
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background: radial-gradient(circle at top left, rgba(13, 110, 253, 0.16), transparent 28%),
+              radial-gradient(circle at bottom right, rgba(102, 16, 242, 0.14), transparent 28%),
+              linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.login-card {
+  width: min(460px, 100%);
+  padding: 2.25rem;
+  border: none;
+  border-radius: 2rem;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 30px 80px rgba(12, 57, 114, 0.12);
+  position: relative;
+  overflow: hidden;
+  animation: cardEntrance 0.95s ease both;
+}
+
+.login-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(102, 16, 242, 0.08), transparent 28%);
+  pointer-events: none;
+}
+
+.login-card::after {
+  content: "";
+  position: absolute;
+  left: -20%;
+  bottom: -16%;
+  width: 220%;
+  height: 180px;
+  background: linear-gradient(135deg, rgba(13, 110, 253, 0.14), rgba(102, 16, 242, 0.1));
+  border-radius: 50%;
+  filter: blur(18px);
+  animation: pulseGlow 7s ease-in-out infinite;
+}
+
+.login-card__hero {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.login-card__icon {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0d6efd, #6610f2);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.35rem;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 18px 36px rgba(13, 110, 253, 0.2);
+  animation: floatIcon 2.5s ease-in-out infinite;
+}
+
+.login-card__title {
+  font-size: clamp(2rem, 2.3vw, 2.35rem);
+  margin-bottom: 0;
+}
+
+.form-control {
+  border-radius: 1rem;
+}
+
+.form-control:focus {
+  border-color: #6610f2;
+  box-shadow: 0 0 0 0.2rem rgba(102, 16, 242, 0.18);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0d6efd, #6610f2);
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 18px 30px rgba(13, 110, 253, 0.16);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 22px 34px rgba(13, 110, 253, 0.22);
+}
+
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  color: #6c757d;
+}
+
+.login-divider span {
+  flex: 1;
+  height: 1px;
+  background: #dee2e6;
+}
+
+.login-social-buttons .btn {
+  border-radius: 1rem;
+  min-height: 52px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.login-social-buttons .btn:hover {
+  transform: translateY(-2px);
+}
+
+.login-card__footer {
+  color: #6c757d;
+}
+
+.login-card__footer a {
+  color: #0d6efd;
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.48; transform: scale(1); }
+  50% { opacity: 0.24; transform: scale(1.05); }
+}

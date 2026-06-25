@@ -1,0 +1,177 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Mr. Sheru\\source\\repos\\EmployeeProject\\Employee.api\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{046F02B2-C305-42AE-A92A-75BD73FF3E26}|Employee.api.csproj|c:\\users\\mr. sheru\\source\\repos\\employeeproject\\employee.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{046F02B2-C305-42AE-A92A-75BD73FF3E26}|Employee.api.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{046F02B2-C305-42AE-A92A-75BD73FF3E26}|Employee.api.csproj|c:\\users\\mr. sheru\\source\\repos\\employeeproject\\employee.api\\controllers\\departmentmastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{046F02B2-C305-42AE-A92A-75BD73FF3E26}|Employee.api.csproj|solutionrelative:controllers\\departmentmastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{046F02B2-C305-42AE-A92A-75BD73FF3E26}|Employee.api.csproj|c:\\users\\mr. sheru\\source\\repos\\employeeproject\\employee.api\\models\\employeemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{046F02B2-C305-42AE-A92A-75BD73FF3E26}|Employee.api.csproj|solutionrelative:models\\employeemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{046F02B2-C305-42AE-A92A-75BD73FF3E26}|Employee.api.csproj|c:\\users\\mr. sheru\\source\\repos\\employeeproject\\employee.api\\models\\employeedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{046F02B2-C305-42AE-A92A-75BD73FF3E26}|Employee.api.csproj|solutionrelative:models\\employeedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{046F02B2-C305-42AE-A92A-75BD73FF3E26}|Employee.api.csproj|c:\\users\\mr. sheru\\source\\repos\\employeeproject\\employee.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{046F02B2-C305-42AE-A92A-75BD73FF3E26}|Employee.api.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{046F02B2-C305-42AE-A92A-75BD73FF3E26}|Employee.api.csproj|c:\\users\\mr. sheru\\source\\repos\\employeeproject\\employee.api\\models\\designation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{046F02B2-C305-42AE-A92A-75BD73FF3E26}|Employee.api.csproj|solutionrelative:models\\designation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{046F02B2-C305-42AE-A92A-75BD73FF3E26}|Employee.api.csproj|c:\\users\\mr. sheru\\source\\repos\\employeeproject\\employee.api\\models\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{046F02B2-C305-42AE-A92A-75BD73FF3E26}|Employee.api.csproj|solutionrelative:models\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{046F02B2-C305-42AE-A92A-75BD73FF3E26}|Employee.api.csproj|c:\\users\\mr. sheru\\source\\repos\\employeeproject\\employee.api\\controllers\\employeemastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{046F02B2-C305-42AE-A92A-75BD73FF3E26}|Employee.api.csproj|solutionrelative:controllers\\employeemastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{046F02B2-C305-42AE-A92A-75BD73FF3E26}|Employee.api.csproj|c:\\users\\mr. sheru\\source\\repos\\employeeproject\\employee.api\\controllers\\designationmastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{046F02B2-C305-42AE-A92A-75BD73FF3E26}|Employee.api.csproj|solutionrelative:controllers\\designationmastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DepartmentMasterController.cs",
+              "DocumentMoniker": "C:\\Users\\Mr. Sheru\\source\\repos\\EmployeeProject\\Employee.api\\Controllers\\DepartmentMasterController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DepartmentMasterController.cs",
+              "ToolTip": "C:\\Users\\Mr. Sheru\\source\\repos\\EmployeeProject\\Employee.api\\Controllers\\DepartmentMasterController.cs",
+              "RelativeToolTip": "Controllers\\DepartmentMasterController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T21:06:40.633Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Designation.cs",
+              "DocumentMoniker": "C:\\Users\\Mr. Sheru\\source\\repos\\EmployeeProject\\Employee.api\\Models\\Designation.cs",
+              "RelativeDocumentMoniker": "Models\\Designation.cs",
+              "ToolTip": "C:\\Users\\Mr. Sheru\\source\\repos\\EmployeeProject\\Employee.api\\Models\\Designation.cs",
+              "RelativeToolTip": "Models\\Designation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T21:06:40.64Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EmployeeDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Mr. Sheru\\source\\repos\\EmployeeProject\\Employee.api\\Models\\EmployeeDbContext.cs",
+              "RelativeDocumentMoniker": "Models\\EmployeeDbContext.cs",
+              "ToolTip": "C:\\Users\\Mr. Sheru\\source\\repos\\EmployeeProject\\Employee.api\\Models\\EmployeeDbContext.cs",
+              "RelativeToolTip": "Models\\EmployeeDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T21:06:40.605Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EmployeeModel.cs",
+              "DocumentMoniker": "C:\\Users\\Mr. Sheru\\source\\repos\\EmployeeProject\\Employee.api\\Models\\EmployeeModel.cs",
+              "RelativeDocumentMoniker": "Models\\EmployeeModel.cs",
+              "ToolTip": "C:\\Users\\Mr. Sheru\\source\\repos\\EmployeeProject\\Employee.api\\Models\\EmployeeModel.cs",
+              "RelativeToolTip": "Models\\EmployeeModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T21:06:40.616Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Mr. Sheru\\source\\repos\\EmployeeProject\\Employee.api\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\Mr. Sheru\\source\\repos\\EmployeeProject\\Employee.api\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-05-18T21:06:40.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Department.cs",
+              "DocumentMoniker": "C:\\Users\\Mr. Sheru\\source\\repos\\EmployeeProject\\Employee.api\\Models\\Department.cs",
+              "RelativeDocumentMoniker": "Models\\Department.cs",
+              "ToolTip": "C:\\Users\\Mr. Sheru\\source\\repos\\EmployeeProject\\Employee.api\\Models\\Department.cs",
+              "RelativeToolTip": "Models\\Department.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T21:06:40.644Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Mr. Sheru\\source\\repos\\EmployeeProject\\Employee.api\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Mr. Sheru\\source\\repos\\EmployeeProject\\Employee.api\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T21:06:40.625Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "EmployeeMasterController.cs",
+              "DocumentMoniker": "C:\\Users\\Mr. Sheru\\source\\repos\\EmployeeProject\\Employee.api\\Controllers\\EmployeeMasterController.cs",
+              "RelativeDocumentMoniker": "Controllers\\EmployeeMasterController.cs",
+              "ToolTip": "C:\\Users\\Mr. Sheru\\source\\repos\\EmployeeProject\\Employee.api\\Controllers\\EmployeeMasterController.cs",
+              "RelativeToolTip": "Controllers\\EmployeeMasterController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMAAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T21:06:40.621Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DesignationMasterController.cs",
+              "DocumentMoniker": "C:\\Users\\Mr. Sheru\\source\\repos\\EmployeeProject\\Employee.api\\Controllers\\DesignationMasterController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DesignationMasterController.cs",
+              "ToolTip": "C:\\Users\\Mr. Sheru\\source\\repos\\EmployeeProject\\Employee.api\\Controllers\\DesignationMasterController.cs",
+              "RelativeToolTip": "Controllers\\DesignationMasterController.cs",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAmwHYAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T21:06:40.636Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
