@@ -1,11 +1,13 @@
 ﻿using Employee.api.Models;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Employee.api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DepartmentMasterController : ControllerBase
     {
         private readonly EmployeeDbContext _context;
@@ -15,57 +17,71 @@ namespace Employee.api.Controllers
             _context = context;
         }
 
-        [HttpGet("GetAllDepartments")]
-        public ActionResult<IEnumerable<Department>> GetDepartments()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Department>>> GetDepartments()
         {
-            var departments = _context.Departments.ToList();
+            var departments = await _context.Departments.ToListAsync();
             return Ok(departments);
         }
 
-        [HttpGet("GetDepartmentById/{id}")]
-        public ActionResult<Department> GetDepartmentById(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Department>> GetDepartmentById(int id)
         {
-            var department = _context.Departments.FirstOrDefault(d => d.DepartmentId == id);
+            var department = await _context.Departments.FindAsync(id);
             if (department == null)
                 return NotFound();
             return Ok(department);
         }
 
-        [HttpPost("CreateDepartment")]
-        public ActionResult<Department> CreateDepartment([FromBody] Department department)
+        [HttpPost]
+        public async Task<ActionResult<Department>> CreateDepartment([FromBody] Department department)
         {
-            // Check if department name already exists
-            if (_context.Departments.Any(d => d.DepartmentName == department.DepartmentName))
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (await _context.Departments.AnyAsync(d => d.DepartmentName.Equals(department.DepartmentName, StringComparison.OrdinalIgnoreCase)))
             {
                 return BadRequest(new { message = "Department must be unique." });
             }
 
             _context.Departments.Add(department);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetDepartmentById), new { id = department.DepartmentId }, department);
         }
 
-        [HttpPut("UpdateDepartment/{id}")]
-        public ActionResult<Department> UpdateDepartment(int id, [FromBody] Department updatedDepartment)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Department>> UpdateDepartment(int id, [FromBody] Department updatedDepartment)
         {
-            //var department = _context.Departments.FirstOrDefault(d => d.DepartmentId == id);
-            var department = _context.Departments.Find(id);
-            if (department == null)
+            if (id != updatedDepartment.DepartmentId)
+                return BadRequest("Id mismatch");
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var existingDepartment = await _context.Departments.FindAsync(id);
+            if (existingDepartment == null)
                 return NotFound();
-            department.DepartmentName = updatedDepartment.DepartmentName;
-            department.IsActive = updatedDepartment.IsActive;
-            _context.SaveChanges();
-            return Ok(department);
+
+            if (await _context.Departments.AnyAsync(d => d.DepartmentId != id && d.DepartmentName.Equals(updatedDepartment.DepartmentName, StringComparison.OrdinalIgnoreCase)))
+            {
+                return BadRequest(new { message = "Department must be unique." });
+            }
+
+            existingDepartment.DepartmentName = updatedDepartment.DepartmentName;
+            existingDepartment.IsActive = updatedDepartment.IsActive;
+            await _context.SaveChangesAsync();
+            return Ok(existingDepartment);
         }
 
-        [HttpDelete("DeleteDepartment/{id}")]
-        public ActionResult DeleteDepartment(int id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteDepartment(int id)
         {
-            var department = _context.Departments.FirstOrDefault(d => d.DepartmentId == id);
+            var department = await _context.Departments.FindAsync(id);
             if (department == null)
                 return NotFound();
+
             _context.Departments.Remove(department);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return NoContent();
         }
     }
