@@ -36,15 +36,16 @@ jobs:
       with:
         dotnet-version: ${{ env.SWASHBUCKLE_DOTNET_CORE_VERSION }}
     - name: Restore
-  run: dotnet restore ./EmployeeProject/Employee.api.sln
+      run: dotnet restore ./EmployeeProject/Employee.api.sln
 
-   - name: Build
-  run: dotnet build ./EmployeeProject/Employee.api.sln --configuration Release --no-restore
+    - name: Build
+      run: dotnet build ./EmployeeProject/Employee.api.sln --configuration Release --no-restore
 
     - name: Test
       run: dotnet test "${{ env.WORKING_DIRECTORY }}" --no-build
-   - name: Publish
-  run: dotnet publish ./EmployeeProject/Employee.api/Employee.api.csproj --configuration Release --no-build --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+    - name: Publish
+      run: dotnet publish ./EmployeeProject/Employee.api/Employee.api.csproj --configuration Release --no-build --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
     - name: Install Swashbuckle CLI .NET Global Tool
       run: dotnet tool install --global Swashbuckle.AspNetCore.Cli --version ${{ env.SWASHBUCLE_ASPNET_CORE_CLI_PACKAGE_VERSION }}
