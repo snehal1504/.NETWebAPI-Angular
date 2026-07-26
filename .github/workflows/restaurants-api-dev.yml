@@ -39,7 +39,7 @@ jobs:
       run: dotnet restore ./Employee.api/Employee.api.sln
 
     - name: Build
-      run: dotnet build ./Employee.api/Employee.api.sln --configuration Release --no-restore
+      run: dotnet build ./Employee.api/Employee.api.csproj --configuration Release --no-restore
 
     - name: Test
       run: dotnet test ./Employee.api/Employee.api.sln --no-build
@@ -51,7 +51,9 @@ jobs:
       run: dotnet tool install --global Swashbuckle.AspNetCore.Cli --version ${{ env.SWASHBUCLE_ASPNET_CORE_CLI_PACKAGE_VERSION }}
       working-directory: ${{ env.WORKING_DIRECTORY }}
     - name: Generate Open API Specification Document
-      run: swagger tofile --serializeasv2 --output "${{ env.API_IMPORT_SPECIFICATION_PATH }}" "${{ env.API_IMPORT_DLL }}" "${{ env.API_IMPORT_VERSION }}"
+      run: swagger tofile --serializeasv2 --output "./publish/swagger.json" "./Employee.api/bin/Release/net10.0/Employee.api.dll" "v1"
+  
+      working-directory: ./Employee.api
     - name: Publish Artifacts
       uses: actions/upload-artifact@v4
       with:
