@@ -21,7 +21,7 @@ env:
   API_IMPORT_VERSION: v1
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 10.0.x
-  WORKING_DIRECTORY: Employee.api\Employee.api.sln
+  WORKING_DIRECTORY: ./Employee.api
 jobs:
   build:
     runs-on: windows-latest
