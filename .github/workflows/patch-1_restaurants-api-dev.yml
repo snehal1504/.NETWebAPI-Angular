@@ -23,11 +23,13 @@ jobs:
         with:
           dotnet-version: '10.x'
 
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
+      - name: Build
+  run: dotnet build ./EmployeeProject/Employee.api.sln --configuration Release
 
-      - name: dotnet publish
-        run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
+
+     - name: Publish
+  run: dotnet publish ./EmployeeProject/Employee.api.csproj --configuration Release --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
