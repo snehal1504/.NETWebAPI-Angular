@@ -6,6 +6,7 @@ import { EmployeeForm } from './pages/employee-form/employee-form';
 import { Department } from './pages/department/department';
 import { Designation } from './pages/designation/designation';
 import { EmployeeList } from './pages/employee-list/employee-list';
+import { AuthGuard } from './services/auth.guard';
 
 export const routes: Routes = [
     {
@@ -20,6 +21,7 @@ export const routes: Routes = [
     {
         path: '',
         component: Header,
+        canActivate: [AuthGuard],
         children:[
             {
                 path: 'dashboard',

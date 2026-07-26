@@ -1,73 +1,72 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
-
-export interface EmployeeModel {
-  employeeId: number;
-  firstName: string;
-  lastName: string;
-  contactNo: string;
-  state: string;
-  city: string;
-  pincode: string;
-  altContactNo?: string;
-  address: string;
-  email: string;
-  designationId?: number;
-  hireDate: string;
-  salary: number;
-  createdDate: string;
-  modifiedDate: string;
-  role?: string;
-  password?: string;
-}
-
-export interface DesignationModel {
-  designationId: number;
-  designationName: string;
-  departmentId: number;
-}
+import { ApiService, EmployeeCreateRequest, DesignationModel } from '../../services/api.service';
 
 @Component({
   selector: 'app-employee-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './employee-form.html',
   styleUrls: ['./employee-form.scss']
 })
 export class EmployeeForm implements OnInit {
-  newEmployee: Partial<EmployeeModel> = {};
-  plainPassword: string = '';
+  newEmployee: Partial<EmployeeCreateRequest> = {
+    firstName: '',
+    lastName: '',
+    contactNo: '',
+    state: '',
+    city: '',
+    pincode: '',
+    altContactNo: '',
+    address: '',
+    email: '',
+    designationId: 0,
+    hireDate: new Date().toISOString().split('T')[0],
+    salary: 0,
+    role: '',
+    password: ''
+  };
   designations: DesignationModel[] = [];
+  private platformId = inject(PLATFORM_ID);
 
-  private apiUrl = 'https://localhost:7043/api/EmployeeMaster';
-  private designationApi = 'https://localhost:7043/api/DesignationMaster';
-
-  constructor(private http: HttpClient) {}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
     this.loadDesignations();
   }
 
   loadDesignations() {
-    this.http.get<DesignationModel[]>(`${this.designationApi}`)
-      .subscribe(data => this.designations = data);
+    this.apiService.getDesignations().subscribe(data => this.designations = data);
   }
 
   addEmployee(form: NgForm) {
-    if (!form.valid) return;
+    if (!form.valid || !this.newEmployee.password) return;
 
-    this.newEmployee.createdDate = new Date().toISOString();
-    this.newEmployee.modifiedDate = new Date().toISOString();
+    const payload: EmployeeCreateRequest = {
+      ...this.newEmployee,
+      firstName: this.newEmployee.firstName || '',
+      lastName: this.newEmployee.lastName || '',
+      contactNo: this.newEmployee.contactNo || '',
+      state: this.newEmployee.state || '',
+      city: this.newEmployee.city || '',
+      pincode: this.newEmployee.pincode || '',
+      altContactNo: this.newEmployee.altContactNo,
+      address: this.newEmployee.address || '',
+      email: this.newEmployee.email || '',
+      designationId: this.newEmployee.designationId,
+      hireDate: this.newEmployee.hireDate || new Date().toISOString().split('T')[0],
+      salary: this.newEmployee.salary || 0,
+      role: this.newEmployee.role || '',
+      password: this.newEmployee.password || ''
+    };
 
-    this.http.post<EmployeeModel>(
-      `${this.apiUrl}/create?plainPassword=${encodeURIComponent(this.plainPassword)}`,
-      this.newEmployee
-    ).subscribe(() => {
+    this.apiService.createEmployee(payload).subscribe(() => {
       alert('Employee created successfully');
-      this.newEmployee = {};
-      this.plainPassword = '';
+      this.newEmployee = { ...payload, firstName: '', lastName: '', contactNo: '', state: '', city: '', pincode: '', address: '', email: '', role: '', password: '' };
       form.resetForm();
     });
   }

@@ -1,5 +1,5 @@
-import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, signal, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet, RouterModule } from '@angular/router';
 
@@ -12,9 +12,51 @@ type NavItem = { label: string; path: string; icon: string; badge?: string | num
   styleUrls: ['./header.scss'],
 })
 export class Header {
-
-  collapsed = signal(localStorage.getItem('sidebarCollapsed') === 'true');
+  private platformId = inject(PLATFORM_ID);
+  collapsed = signal(this.getInitialCollapsedState());
   mobileVisible = false;
+
+  toggle() {
+    const next = !this.collapsed();
+    this.collapsed.set(next);
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('sidebarCollapsed', String(next));
+    }
+  }
+
+  showMobile() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+    this.mobileVisible = true;
+    const el = document.querySelector('.app-sidebar');
+    el?.classList.add('show-mobile');
+  }
+
+  hideMobile() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+    this.mobileVisible = false;
+    const el = document.querySelector('.app-sidebar');
+    el?.classList.remove('show-mobile');
+  }
+
+  onNavClickMobile() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+    if (window.innerWidth <= 767.98) {
+      this.hideMobile();
+    }
+  }
+
+  private getInitialCollapsedState(): boolean {
+    if (!isPlatformBrowser(this.platformId)) {
+      return false;
+    }
+    return localStorage.getItem('sidebarCollapsed') === 'true';
+  }
 
   // Navigation items (adjust labels/paths/icons to match your routes)
   navItems: NavItem[] = [
@@ -25,29 +67,4 @@ export class Header {
     { label: 'Designation', path: '/designation', icon: 'fa-solid fa-briefcase' },
     { label: 'Settings', path: '/settings', icon: 'fa-solid fa-gear' }
   ];
-
-  toggle() {
-    const next = !this.collapsed();
-    this.collapsed.set(next);
-    localStorage.setItem('sidebarCollapsed', String(next));
-  }
-
-  showMobile() {
-    this.mobileVisible = true;
-    const el = document.querySelector('.app-sidebar');
-    el?.classList.add('show-mobile');
-  }
-
-  hideMobile() {
-    this.mobileVisible = false;
-    const el = document.querySelector('.app-sidebar');
-    el?.classList.remove('show-mobile');
-  }
-
-  // Close mobile overlay after navigation
-  onNavClickMobile() {
-    if (window.innerWidth <= 767.98) {
-      this.hideMobile();
-    }
-  }
 }

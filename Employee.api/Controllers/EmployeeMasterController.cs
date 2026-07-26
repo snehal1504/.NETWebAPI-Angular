@@ -56,25 +56,39 @@ public class EmployeeMasterController : ControllerBase
 
     // ✅ CREATE Employee
     [Authorize]
-    [HttpPost("create")]
-    public async Task<IActionResult> Create([FromBody] EmployeeModel employee, [FromQuery] string plainPassword)
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] EmployeeCreateRequest request)
     {
         try
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            // Uniqueness checks
-            if (await _context.Employees.AnyAsync(e => e.ContactNo == employee.ContactNo))
+            if (await _context.Employees.AnyAsync(e => e.ContactNo == request.ContactNo))
                 return BadRequest("Contact number must be unique");
-            if (await _context.Employees.AnyAsync(e => e.Email == employee.Email))
+            if (await _context.Employees.AnyAsync(e => e.Email == request.Email))
                 return BadRequest("Email must be unique");
 
-            // Hash password
-            var hasher = new PasswordHasher<EmployeeModel>();
-            employee.Password = hasher.HashPassword(employee, plainPassword);
+            var employee = new EmployeeModel
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                ContactNo = request.ContactNo,
+                Address = request.Address,
+                City = request.City,
+                State = request.State,
+                PinCode = request.PinCode,
+                AltContactNo = request.AltContactNo,
+                Email = request.Email,
+                DesignationId = request.DesignationId,
+                HireDate = request.HireDate,
+                Salary = request.Salary,
+                Role = request.Role,
+                CreatedDate = DateTime.UtcNow,
+                ModifiedDate = DateTime.UtcNow
+            };
 
-            employee.CreatedDate = DateTime.UtcNow;
-            employee.ModifiedDate = DateTime.UtcNow;
+            var hasher = new PasswordHasher<EmployeeModel>();
+            employee.Password = hasher.HashPassword(employee, request.Password);
 
             _context.Employees.Add(employee);
             await _context.SaveChangesAsync();
@@ -144,6 +158,7 @@ public class EmployeeMasterController : ControllerBase
 
     // ✅ FILTER + SORT + PAGINATION
     // Example: api/employees/filter?search=Snehal&sortBy=FirstName&sortOrder=asc&page=1&pageSize=5
+    [Authorize]
     [HttpGet("filter")]
     public async Task<IActionResult> Filter(
         string? search,
@@ -156,7 +171,6 @@ public class EmployeeMasterController : ControllerBase
         {
             var query = _context.Employees.AsQueryable();
 
-            // 🔍 Search filter
             if (!string.IsNullOrEmpty(search))
             {
                 query = query.Where(e =>
@@ -165,21 +179,19 @@ public class EmployeeMasterController : ControllerBase
                     e.Email.Contains(search));
             }
 
-            // ↕ Sorting
-            query = sortOrder.ToLower() == "desc"
+            query = sortOrder?.ToLower() == "desc"
                 ? query.OrderByDescending(e => EF.Property<object>(e, sortBy))
                 : query.OrderBy(e => EF.Property<object>(e, sortBy));
 
-            // 📄 Pagination
             var totalRecords = await query.CountAsync();
             var employees = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
 
             return Ok(new
             {
-                TotalRecords = totalRecords,
-                Page = page,
-                PageSize = pageSize,
-                Data = employees
+                totalRecords,
+                page,
+                pageSize,
+                data = employees
             });
         }
         catch (Exception ex)

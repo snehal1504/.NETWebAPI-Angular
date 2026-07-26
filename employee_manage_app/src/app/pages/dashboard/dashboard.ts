@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,9 +10,13 @@ import { CommonModule } from '@angular/common';
 })
 export class Dashboard implements OnInit {
   firstName: string = '';
+  private platformId = inject(PLATFORM_ID);
 
   ngOnInit(): void {
-    // Retrieve logged-in user info from localStorage
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     const userData = localStorage.getItem('empLoginUser');
     if (userData) {
       const parsed = JSON.parse(userData);

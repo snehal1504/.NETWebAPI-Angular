@@ -55,7 +55,7 @@ public class DesignationMasterController : ControllerBase
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            if (_context.Designations.All(d => d.DesignationName.ToLower() == designation.DesignationName.ToLower()))
+            if (await _context.Designations.AnyAsync(d => d.DesignationName.Equals(designation.DesignationName, StringComparison.OrdinalIgnoreCase)))
             {
                 return BadRequest(new { message = "Designation must be unique." });
             }

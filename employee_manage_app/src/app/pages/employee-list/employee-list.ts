@@ -1,49 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-export interface EmployeeModel {
-  employeeId: number;
-  firstName: string;
-  lastName: string;
-  contactNo: string;
-  state: string;
-  city: string;
-  pincode: string;
-  altContactNo?: string;
-  address: string;
-  email: string;
-  designationId?: number;
-  hireDate: string;
-  salary: number;
-  createdDate: string;
-  modifiedDate: string;
-  role?: string;
-}
+import { ApiService, EmployeeModel } from '../../services/api.service';
 
 @Component({
   selector: 'app-employee-list',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './employee-list.html',
   styleUrls: ['./employee-list.scss']
 })
 export class EmployeeList implements OnInit {
   employees: EmployeeModel[] = [];
   editingEmployee: EmployeeModel | null = null;
+  private platformId = inject(PLATFORM_ID);
 
-  private apiUrl = 'https://localhost:7043/api/EmployeeMaster';
-
-  constructor(private http: HttpClient) {}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
     this.loadEmployees();
   }
 
   loadEmployees() {
-    this.http.get<EmployeeModel[]>(`${this.apiUrl}`)
-      .subscribe(data => this.employees = data);
+    this.apiService.getEmployees().subscribe(data => this.employees = data);
   }
 
   editEmployee(emp: EmployeeModel) {
@@ -54,18 +36,17 @@ export class EmployeeList implements OnInit {
     if (!this.editingEmployee) return;
     this.editingEmployee.modifiedDate = new Date().toISOString();
 
-    this.http.put<EmployeeModel>(
-      `${this.apiUrl}/${this.editingEmployee.employeeId}`,
-      this.editingEmployee
-    ).subscribe(updated => {
-      const idx = this.employees.findIndex(e => e.employeeId === updated.employeeId);
-      if (idx > -1) this.employees[idx] = updated;
-      this.editingEmployee = null;
-    });
+    this.apiService.updateEmployee(this.editingEmployee.employeeId, this.editingEmployee)
+      .subscribe(updated => {
+        const idx = this.employees.findIndex(e => e.employeeId === updated.employeeId);
+        if (idx > -1) this.employees[idx] = updated;
+        this.editingEmployee = null;
+      });
   }
 
   deleteEmployee(id: number) {
-    this.http.delete(`${this.apiUrl}/${id}`)
-      .subscribe(() => this.employees = this.employees.filter(e => e.employeeId !== id));
+    this.apiService.deleteEmployee(id).subscribe(() => {
+      this.employees = this.employees.filter(e => e.employeeId !== id);
+    });
   }
 }

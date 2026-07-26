@@ -4,5 +4,6 @@
     <ActiveDebugProfile>https</ActiveDebugProfile>
     <Controller_SelectedScaffolderID>ApiControllerEmptyScaffolder</Controller_SelectedScaffolderID>
     <Controller_SelectedScaffolderCategoryPath>root/Common/Api</Controller_SelectedScaffolderCategoryPath>
+    <NameOfLastUsedPublishProfile>C:\Users\Mr. Sheru\source\repos\EmployeeProject\.github\workflows\restaurants-api-dev.yml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

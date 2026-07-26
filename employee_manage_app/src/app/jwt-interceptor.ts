@@ -7,16 +7,17 @@ import {
   HttpEvent,
   HttpErrorResponse
 } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem('jwtToken');
+    const token = this.authService.getToken();
 
     const authReq = token
       ? req.clone({
@@ -28,13 +29,8 @@ export class JwtInterceptor implements HttpInterceptor {
 
     return next.handle(authReq).pipe(
       catchError((err: unknown) => {
-        if (err instanceof HttpErrorResponse) {
-          // Example: redirect to login on 401
-          if (err.status === 401) {
-            // clear token and navigate to login
-            localStorage.removeItem('jwtToken');
-            this.router.navigate(['/login']);
-          }
+        if (err instanceof HttpErrorResponse && err.status === 401) {
+          this.authService.logout();
         }
         return throwError(() => err);
       })
