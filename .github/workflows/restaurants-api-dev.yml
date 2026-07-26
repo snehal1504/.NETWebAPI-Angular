@@ -36,7 +36,7 @@ jobs:
       with:
         dotnet-version: ${{ env.SWASHBUCKLE_DOTNET_CORE_VERSION }}
     - name: Restore
-      run: dotnet restore ./EmployeeProject/Employee.api.sln
+      run: dotnet restore ./Employee.api.sln
 
     - name: Build
       run: dotnet build ./EmployeeProject/Employee.api.sln --configuration Release --no-restore
